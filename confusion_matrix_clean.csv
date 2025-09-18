@@ -1,0 +1,6 @@
+,pred_entertainment,pred_food,pred_politics,pred_sports,pred_tech
+true_entertainment,122,0,0,0,0
+true_food,0,298,0,0,0
+true_politics,0,0,510,0,0
+true_sports,0,0,0,278,0
+true_tech,0,0,0,524,406
