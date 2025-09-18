@@ -1,117 +1,73 @@
-# 🧠 Robust Text Classification (Sports | Politics | Tech | Food | Entertainment)
+project:
+  name: "Robust Text Classification"
+  categories: ["sports", "politics", "tech", "food", "entertainment"]
+  description: >
+    A robust text classification project that predicts whether a sentence
+    belongs to sports, politics, tech, food, or entertainment. It is designed
+    to handle noisy, real-world text containing slang, emojis, typos, and
+    random capitalization. Includes a Streamlit UI for live predictions.
+  license: "MIT"
 
-This project implements a **robust text classification system** that predicts whether a sentence belongs to one of five categories:
+features:
+  - text normalization:
+      - lowercasing
+      - de-duplication of characters (e.g. speeech → speech)
+      - emoji-to-word mapping (🍔 → burger, 🎬 → movie, 🔥 → fire)
+      - slang expansion (2day → today, smh → disappointed, lol → funny)
+      - enrichment of political keywords (pm → prime minister, election, parliament)
+  - feature extraction:
+      - word-level TF-IDF n-grams
+      - character-level TF-IDF n-grams
+  - model:
+      type: "Stacked Ensemble"
+      base_learners:
+        - "Calibrated Linear SVC"
+        - "Complement Naive Bayes"
+        - "SGD Logistic Regression"
+      meta_learner: "Logistic Regression"
+  - evaluation:
+      - group-wise splitting to prevent data leakage
+      - clean accuracy: "~75%"
+      - macro f1: "~0.82"
+      - noisy robustness accuracy: "~74%"
+  - ui:
+      framework: "Streamlit"
+      capability: "Interactive live predictions with confidence scores"
 
-- 🍔 Food  
-- ⚽ Sports  
-- 🗳️ Politics  
-- 📱 Tech  
-- 🎬 Entertainment  
+project_structure:
+  - app_simple.py: "Streamlit UI for live classification"
+  - text_cls_stacked.joblib: "Saved trained model"
+  - notebook.ipynb: "Training and evaluation notebook"
+  - data.csv: "Dataset (text, label)"
+  - README.md: "Documentation"
 
-Unlike simple models, this project is built to handle **messy real-world text** that may include:
-- Spelling mistakes  
-- Slang words  
-- Emojis  
-- Random capitalization  
-- Extra spaces  
+setup:
+  clone: "git clone https://github.com/yourusername/text-classification.git"
+  environment:
+    - "python3 -m venv venv"
+    - "source venv/bin/activate  # macOS/Linux"
+    - "venv\\Scripts\\activate   # Windows"
+  install: "pip install -r requirements.txt"
+  run: "streamlit run app_simple.py"
 
-It also includes a **Streamlit user interface** for live testing.
+examples:
+  - sentence: "Brgr iz da bessstt 🍔🔥"
+    prediction: "Food"
+  - sentence: "PM gave big speeech 2day"
+    prediction: "Politics"
+  - sentence: "New AI phone dropped!"
+    prediction: "Tech"
+  - sentence: "Oscars award show 🎬"
+    prediction: "Entertainment"
+  - sentence: "Cricket commentary felt biased smh"
+    prediction: "Sports"
 
----
+results_summary:
+  accuracy_clean: "~75%"
+  macro_f1_clean: "~0.82"
+  robustness_accuracy: "~74%"
 
-## ✨ Key Features
-- **Text Normalization**  
-  - Lowercasing, de-duplication of characters (e.g., *speeech → speech*)  
-  - Emoji-to-word mapping (🍔 → burger, 🎬 → movie, 🔥 → fire)  
-  - Slang expansion (*2day → today, smh → disappointed, lol → funny*)  
-  - Enrichment of political keywords (*pm → prime minister, election, parliament, speech*)  
-
-- **Feature Extraction**  
-  - Hybrid **TF-IDF** (word-level + character-level n-grams)  
-  - Handles typos and noisy substrings  
-
-- **Stacked Ensemble Model**  
-  - Base learners: Calibrated Linear SVC, Complement Naive Bayes, SGD (logistic)  
-  - Meta learner: Logistic Regression  
-  - Prevents overfitting and improves robustness  
-
-- **Evaluation**  
-  - Group-wise splitting to avoid data leakage  
-  - Clean test accuracy: **~75%**  
-  - Macro F1-score: **~0.82**  
-  - Robustness under noisy inputs: **~74%**  
-
-- **UI**  
-  - Built with **Streamlit**  
-  - Enter any sentence and view predictions with confidence scores  
-
----
-
-## 📂 Project Structure
-.
-├── app_simple.py # Streamlit UI for live classification
-├── text_cls_stacked.joblib # Saved trained model (generated after training)
-├── notebook.ipynb # Full training and evaluation notebook
-├── data.csv # Dataset (text,label)
-└── README.md
-
-yaml
-Copy code
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repo
-```bash
-git clone https://github.com/yourusername/text-classification.git
-cd text-classification
-2. Create a virtual environment
-bash
-Copy code
-python3 -m venv venv
-source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate      # Windows
-3. Install dependencies
-bash
-Copy code
-pip install -r requirements.txt
-4. Run the Streamlit UI
-bash
-Copy code
-streamlit run app_simple.py
-🧪 Example Predictions
-Input sentence → Predicted category
-
-“Brgr iz da bessstt 🍔🔥” → Food
-
-“PM gave big speeech 2day” → Politics
-
-“New AI phone dropped!” → Tech
-
-“Oscars award show 🎬” → Entertainment
-
-“Cricket commentary felt biased smh” → Sports
-
-📊 Results Summary
-Metric	Score
-Accuracy (clean)	~75%
-Macro F1 (clean)	~0.82
-Robustness Accuracy	~74%
-
-📜 License
-This project is released under the MIT License.
-
-🙌 Acknowledgements
-scikit-learn for model training
-
-Streamlit for UI
-
-Hugging Face / NLP community inspiration for handling noisy text
-
-yaml
-Copy code
-
----
-
-⚡ Do you also want me to create a **requirements.txt** file with safe pinned versions (so anyone can run your Streamlit app without dependency issues)?
+acknowledgements:
+  - "scikit-learn for machine learning"
+  - "Streamlit for the web UI"
+  - "NLP community for noisy text handling techniques"
