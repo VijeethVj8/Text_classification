@@ -42,7 +42,7 @@ project_structure:
   - README.md: "Documentation"
 
 setup:
-  clone: "git clone https://github.com/yourusername/text-classification.git"
+  
   environment:
     - "python3 -m venv venv"
     - "source venv/bin/activate  # macOS/Linux"
